@@ -1,0 +1,193 @@
+public class BaseballGame
+{
+    private String[] names = new String[2];
+    protected int[][] scores;
+    public static final int UNPLAYED = -99;
+    private final int INNINGS = 9;
+    public BaseballGame()
+    {
+        scores = new int[2][INNINGS];
+        for(int t = 0; t < scores.length; ++t)
+            for(int i = 0; i < scores[t].length; ++i)
+                scores[t][i] = UNPLAYED;
+    }
+    //TeamNames
+    public void setNames(String n1, String n2)
+    {
+        names[0] = n1;
+        names[1] = n2;
+    }
+    //ScoreSet
+    public void setScore(int team, int inning, int score)
+    {
+        int x;
+        boolean isBadTeam = false;
+        boolean isBadInning = false;
+        if(team < 0 || team > scores.length - 1)
+            System.out.println(" " + team + " is not a valid team value");
+        else
+        if(inning < 0 || inning > scores[0].length - 1)
+            System.out.println("" + inning + " is not a valid inning value");
+        else
+        {
+            for(x = 0; x < inning; ++x)
+                if(scores[team][x] == UNPLAYED)
+                    isBadInning = true;
+            if(isBadInning)
+                System.out.println(" A score cannot yet be set for inning " + inning);
+            else
+                scores[team][inning] = score;
+        }
+    }
+    public String getNames()
+    {
+        return names[0] + " vs. " + names[1];
+    }
+    public String getName(int pos)
+    {
+        return names[pos];
+    }
+    public int getScore(int team, int inning)
+    {
+        int score = -99;
+        if(team < 0 || team > scores.length - 1)
+            System.out.println(team + " is an invalid team number");
+        else
+         public String getNames()
+    {
+        return names[0] + " vs. " + names[1];
+    }
+    public String getName(int pos)
+    {
+        return names[pos];
+    }
+    public int getScore(int team, int inning)
+    {
+        int score = -99;
+        if(team < 0 || team > scores.length - 1)
+            System.out.println(team + " is an invalid team number");
+        else
+        if(inning < 0 || inning > scores[0].length - 1)
+            System.out.println(inning + " is an invalid inning");
+        else
+            score = scores[team][inning];
+        return score;
+    }
+    public int getInnings()
+    {
+        return INNINGS;
+    }
+}
+
+---
+
+public class HighSchoolBaseballGame extends BaseballGame
+{
+    private final int INNINGS = 7;
+    
+    public HighSchoolBaseballGame()
+    {
+        scores = new int[2][INNINGS];
+        for(int t = 0; t < scores.length; ++t)
+            for(int i = 0; i < scores[t].length; ++i)
+                scores[t][i] = UNPLAYED;
+    }
+    @Override
+
+    public int getInnings()
+    {
+        return INNINGS;
+    }
+}
+
+---
+
+public class LittleLeagueBaseballGame extends BaseballGame
+{
+    private final int INNINGS = 6;
+    
+    public LittleLeagueBaseballGame()
+    {
+        scores = new int[2][INNINGS];
+        for(int t = 0; t < scores.length; ++t)
+            for(int i = 0; i < scores[t].length; ++i)
+                scores[t][i] = UNPLAYED;
+    }
+    @Override
+    //override
+    public int getInnings()
+    {
+        return INNINGS;
+    }
+}
+
+---
+
+public class DemoBaseballGame
+{
+    public static void main(String[] args)
+    {
+        
+        BaseballGame baseballGame = new BaseballGame();
+        //e:tm
+        baseballGame.setNames("North", "East");
+        System.out.println("\n Start");
+        display(baseballGame);
+        baseballGame.setScore(0, 0, 2);
+        baseballGame.setScore(1, 0, 0);
+        System.out.println("\nAfter setting first inning");
+        display(baseballGame);
+        System.out.println("\nTrying to set fifth inning (inning 4) too soon");
+        baseballGame.setScore(0, 4, 1);
+        System.out.println("\nAfter setting second inning scores");
+        baseballGame.setScore(0, 1, 1);
+        baseballGame.setScore(1, 1, 1);
+        display(baseballGame);
+        System.out.println("\nTryng to use an invalid inning");
+        baseballGame.setScore(0, 9, 2);
+        System.out.println("\nTrying to use an invalid team");
+        baseballGame.setScore(2, 2, 2);
+        System.out.println("\nAfter setting the rest of the innings");
+        for(int t = 0; t < 2; ++t)
+            for(int i = 2; i < baseballGame.getInnings(); ++i)
+                baseballGame.setScore(t, i, 0);
+        display(baseballGame);
+    }
+    //ScoreSet
+    public static void display(BaseballGame b)
+    {
+        int[] total = {0, 0};
+        boolean areInningsLeft = false;
+        int score;
+        System.out.println("Game between " + b.getNames());
+        for(int t = 0; t < 2; ++t)
+        {
+            for(int i = 0; i < b.getInnings(); ++i)
+            {
+                score = b.getScore(t, i);
+                if(score != BaseballGame.UNPLAYED)
+                {
+                    if(i == 0)
+                        System.out.print("Team " + t + ": ");
+                    System.out.print(score + " ");
+                    total[t] += score;
+                }
+                else
+                    areInningsLeft = true;
+            }
+            System.out.println();
+        }
+        if(b.getScore(0, 0) == BaseballGame.UNPLAYED && b.getScore(1, 0) == BaseballGame.UNPLAYED)
+            System.out.println("No innings played yet.");
+        if(!areInningsLeft)
+        {
+            if(total[0] > total[1])
+                System.out.println(b.getName(0) + " win!");
+            else
+            if(total[0] < total[1])
+                System.out.println(b.getName(1) + " win!");
+            else
+                System.out.println("Tie Game!");
+        }
+    }
+}
