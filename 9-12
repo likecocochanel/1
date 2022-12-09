@@ -1,0 +1,153 @@
+//Turner.java
+
+//Implementation of Turner interface
+
+public interface Turner
+
+{
+
+//Declaration of turn method
+
+    public abstract void turn();
+    
+    --
+    
+    //Implementation of Leaf class
+
+public class Leaf implements Turner
+
+{
+
+    @Override
+
+//Implementation of turn method
+
+    public void turn()
+
+    {
+
+//Display statement
+
+        System.out.println("Changig colors.");
+
+    }
+
+--
+
+//Page.java
+
+//Implementation of Page class
+
+public class Page implements Turner
+
+{
+
+    @Override
+
+//Implementation of turn method
+
+    public void turn()
+
+    {
+
+//Display statement
+
+        System.out.println("Going to the next page.");
+
+    }
+
+}
+
+--
+
+//Pancake.java
+
+//Implementation of Pancake class
+
+public class Pancake implements Turner
+
+{
+
+    @Override
+
+//Implementation of turn method
+
+    public void turn()
+
+    {
+
+//Display statement
+
+        System.out.println("Flipping.");
+
+    }
+
+}
+
+--
+
+public class DemoTurners
+{
+  public static void main(String[] args)
+  {
+     Leaf aLeaf = new Leaf();
+     Page aPage = new Page();
+     Pancake aCake = new Pancake();
+     aLeaf.turn();
+     aPage.turn();
+     aCake.turn();
+  }
+}
+
+
+--
+
+//DemoTurners2.java
+
+//Implementation of DemoTurners2 class
+
+public class DemoTurners2
+
+{
+
+//Implementation of main class
+
+    public static void main (String [] args)
+
+    {
+
+//Declaration of Leaf class object
+
+        Leaf lobject = new Leaf();
+
+//call turn method with Leaf class object
+
+        lobject.turn();
+
+//Declaration of Page class object
+
+        Page pobject = new Page();
+
+//call turn method with Page class object
+
+        pobject.turn();
+
+//Declaration of Pancake class object
+
+        Pancake panobject = new Pancake();
+
+//call turn method with Pancake class object
+
+        panobject.turn();
+
+//Declaration of Vehicle class object
+
+        Vehicle vobject = new Vehicle();
+
+//call turn method with Vehicle class object
+
+        vobject.turn();
+
+    }
+
+}
